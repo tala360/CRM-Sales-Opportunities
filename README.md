@@ -15,9 +15,16 @@ The sales organization needed a centralized analytics solution to:
 ## My Process
 ### 1. Data Import & Database Setup
 I began by setting up a SQL Server database and importing the raw CSV data files:
-- Database Architecture: created a relational database (crm_sales) with 4 normalized tables:
+**Database Architecture: created a relational database (crm_sales) with 4 normalized tables:**
 - ``accounts`` table - Customer/company information
   - Fields: account name, sector, year_established, revenue, employees, office_location, subsidiary_of
   - Data types optimized: NVARCHAR for text, DECIMAL for revenue, INT for employees
-
-
+- ``products`` table - Product catalog
+  - Fields: product name, series, sales_price
+  - Captures the 6 product lines (GTX Pro, GTX Plus Pro, MG Advanced, etc.)
+- `sales_pipeline` table - Core fact table
+  - Fields: opportunity_id (PK), sales_agent, product, account, deal_stage, engage_date, close_date, close_value
+  - Captures full sales lifecycle from engagement to close opportunity_id as primary key ensures data integrity
+- `sales_agents` table - Sales team hierarchy
+  - Fields: sales_agent, manager, regional_office
+  - Links 30+ agents to 6 regional managers
