@@ -193,3 +193,7 @@ Some of my findings include:
 
 The rest of the EDA analysis can be found in `EDA.sql`.
 
+### 4. Data Modeling
+First, I connected to the data in Power BI using the SQL Server connector through Import Mode.<br>
+I designed a star schema in Power BI optimized for performance, with one-to-many relationships between the dimension and fact tables respectively as shown below:
+
