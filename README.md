@@ -231,7 +231,7 @@ I built a 5-page interactive dashboard with strategic layout and user experience
     - You can filter by manager name and the timeframe (year or quarter) to get an overview of the manager's performance during the specified quarter.
     - Comparative Metrics: Company averages displayed alongside manager metrics
     - Clicking on the "Click to see details" button navigates to the Engagement Opportunities page shown in point (2).
-      ![page 1][images/page 1.png]
+      ![page1][images/page 1.png]
   
 
   
