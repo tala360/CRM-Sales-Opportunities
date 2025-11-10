@@ -103,7 +103,10 @@ WHERE deal_stage = 'Won'
 GROUP BY t1.sales_agent,t2.manager
 ORDER BY total_sales DESC
 ```
+
   - **Finding**: Darcel Schlecht dominated with $1.15M in closed revenue, more than 2x the second-place performer.
+
+    
 - **Win Rate Analysis**:
 ```sql
 SELECT 
