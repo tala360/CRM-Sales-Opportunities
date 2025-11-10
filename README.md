@@ -1,10 +1,13 @@
 # CRM Sales Opportunities Dashboard
 The project designs an interactive dashboard for sales team managers of a company selling computer hardware to large businesses to keep track of sales performance of their team. <br>
-![page_1](images/page_1.png)
-![page_2](images/page_2.png)
-![page_3](images/page_3.png)
-![page_4](images/page_4.png)
-![page_5](images/page_5.png)
+<p align="center">
+  <img src="images/page_1.png" alt="page 1" width="600" height="350"><br>
+  <img src="images/page_2.png" alt="page 2" width="600" height="350"><br>
+  <img src="images/page_3.png" alt="page 3" width="600" height="350"><br>
+  <img src="images/page_4.png" alt="page 4" width="600" height="350"><br>
+  <img src="images/page_5.png" alt="page 5" width="600" height="350">
+</p>
+
 ### Tech Stack: SQL (T-SQL) | Power BI | DAX
 ### SQL Techniques Used:
 - Window Functions (AVG OVER PARTITION BY, RANK)
