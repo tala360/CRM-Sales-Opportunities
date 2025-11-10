@@ -24,7 +24,10 @@ I began by setting up a SQL Server database and importing the raw CSV data files
   - Captures the 6 product lines (GTX Pro, GTX Plus Pro, MG Advanced, etc.)
 - `sales_pipeline` table - Core fact table
   - Fields: opportunity_id (PK), sales_agent, product, account, deal_stage, engage_date, close_date, close_value
-  - Captures full sales lifecycle from engagement to close opportunity_id as primary key ensures data integrity
+  - Captures full sales lifecycle from engagement to close
+  - **opportunity_id** as primary key ensures data integrity
 - `sales_agents` table - Sales team hierarchy
   - Fields: sales_agent, manager, regional_office
   - Links 30+ agents to 6 regional managers
+**Import Process**:
+- Used ``sql BULK INSERT``
