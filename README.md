@@ -72,19 +72,22 @@ WHERE product = 'GTXPro'
 ### 3. Exploratory Data Analysis (EDA)
 With clean data in hand, I dove into EDA to uncover patterns, identify top performers, and understand what drives sales success. My approach combined statistical analysis with business context to generate actionable insights.<br>
 Some of my findings include:
-- **Revenue Trends**: I started by examining quarterly performance to identify seasonality patterns: 
-```sql
-SELECT 
-    CONCAT('Q',DATEPART(QUARTER,CLOSE_DATE),' ',DATEPART(YEAR,CLOSE_DATE)) AS quarter_year,
-    SUM(CLOSE_VALUE) AS TOTAL_SALES,
-    AVG(CLOSE_VALUE) AS AVG_SALE_VALUE
-FROM sales_pipeline 
-WHERE deal_stage='Won'
-GROUP BY CONCAT('Q',DATEPART(QUARTER,CLOSE_DATE),' ',DATEPART(YEAR,CLOSE_DATE))
-ORDER BY quarter_year ASC
-```
+- **Revenue Trends**: I started by examining quarterly performance to identify seasonality patterns:  
 
-  - **Finding:** Q2 2017 appeared to be the strongest quarter at $3.09M, while Q1 lagged at $1.13M—a 63% difference revealing mid-year revenue spike.
+    ```sql
+    SELECT 
+        CONCAT('Q',DATEPART(QUARTER,CLOSE_DATE),' ',DATEPART(YEAR,CLOSE_DATE)) AS quarter_year,
+        SUM(CLOSE_VALUE) AS TOTAL_SALES,
+        AVG(CLOSE_VALUE) AS AVG_SALE_VALUE
+    FROM sales_pipeline 
+    WHERE deal_stage='Won'
+    GROUP BY CONCAT('Q',DATEPART(QUARTER,CLOSE_DATE),' ',DATEPART(YEAR,CLOSE_DATE))
+    ORDER BY quarter_year ASC
+    ```
+
+    - **Finding:** Q2 2017 appeared to be the strongest quarter at $3.09M, while Q1 lagged at $1.13M—a 63% difference revealing mid-year revenue spike.
+
+    
 - **Top Performers**:
   
 ```sql
