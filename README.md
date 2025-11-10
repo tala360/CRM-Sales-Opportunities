@@ -85,7 +85,7 @@ Some of my findings include:
     ORDER BY quarter_year ASC
     ```
 
-    - **Finding:** Q2 2017 appeared to be the strongest quarter at $3.09M, while Q1 lagged at $1.13M—a 63% difference revealing mid-year revenue spike.
+    - **Finding:** Q2 2017 turned out to be the strongest quarter, bringing in $3.09M in revenue, which was 63% higher than Q1’s $1.13M and showed a clear mid-year spike in performance.
 
     
 - **Top Performers**:  
@@ -143,18 +143,25 @@ Some of my findings include:
     - **Finding**: Markita Hansen held highest potential value ($282.8K/79 deals) vs Vicki Laflamme's volume strategy (104 opportunities/$227.3K).
 
 
-- **Geographic Analysis**:  
+- **Product Performance using CTEs**:  
     ```sql
-    SELECT 
-        office_location AS region, 
-        SUM(close_value) AS total_sales
-    FROM sales_pipeline AS t1
-    LEFT JOIN accounts AS t2 ON t1.account = t2.account
-    WHERE deal_stage = 'Won'
-    GROUP BY office_location
-    ORDER BY total_sales DESC
+          WITH cte_product_sales AS (
+          SELECT [product], 
+              close_value,
+              CASE WHEN deal_stage = 'Won' THEN 1 ELSE 0 END AS win_flag
+          FROM sales_pipeline
+          WHERE close_date IS NOT NULL)
+      SELECT 
+          [product], 
+          SUM(close_value) AS total_sales,
+          SUM(win_flag) AS Wins,
+          AVG(CAST(win_flag AS FLOAT))*100 AS win_rate
+      FROM cte_product_sales
+      GROUP BY [product]
+      ORDER BY total_sales DESC
     ```
 
-    - **Finding**: Top 5 countries (US, Korea, Jordan, Panama, Japan) drove majority revenue.
+    - **Finding**: GTX Pro led revenue ($3.51M/55% win rate) while MG Special had highest win rate (64.84%): price vs. conversion trade-off.
 
 The rest of the EDA analysis can be found in `EDA.sql`.
+
