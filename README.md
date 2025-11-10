@@ -195,5 +195,19 @@ The rest of the EDA analysis can be found in `EDA.sql`.
 
 ### 4. Data Modeling
 First, I connected to the data in Power BI using the SQL Server connector through Import Mode.<br>
-I designed a star schema in Power BI optimized for performance, with one-to-many relationships between the dimension and fact tables respectively as shown below:
+I designed a star schema in Power BI optimized for performance, with one-to-many relationships between the dimension and fact tables respectively. A calendar table was created to enable time series analysis such as quarter-on-quarter growth, with `close_date` as the active relationship and `engage_date` as an inactive relationship.
 ![schema](images/schema.png)
+
+I then created a variety of measures and calculated columns using DAX, including but not limited to:
+- **QoQ Sales Growth**:
+  ```QoQ Sales Growth = 
+    var SalesLastQtr = CALCULATE(sum('sales_pipeline'[close_value]),DATEADD('Calendar'[Date], -1, QUARTER))
+    return divide(sum('sales_pipeline'[close_value])-SalesLastQtr,SalesLastQtr)
+    ```
+  - **Win Rate**:
+    ```Total Wins = CALCULATE(COUNTROWS('sales_pipeline'),FILTER('sales_pipeline','sales_pipeline'[deal_stage] = "Won"))```
+  ```Win Rate = 
+      VAR Losses =  CALCULATE(COUNT([opportunity_id]), sales_pipeline[deal_stage]="Lost")
+      RETURN
+      DIVIDE([Total Wins], [Total Wins] + Losses)
+  ```
