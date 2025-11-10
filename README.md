@@ -3,4 +3,11 @@ The project designs an interactive dashboard for sales team managers of a compan
 The dashboard project utilizes SQL (T-SQL) to clean and explore data, and Power BI to create the interactive dashboard.
 
 ## Business Problem:
-- 
+The sales organization needed a centralized analytics solution to:
+- **Track performance across 6 regional managers and their teams of sales agents**
+- **Monitor key metrics (total sales, win rates, average deal values, and sales cycle length)**
+- **Compare performance:** Identify top performers and underperformers relative to company averages
+- **Analyze product mix:** Understand which products (GTX Pro, GTX Plus Pro, MG Advanced, etc.) drive revenue
+- **Identify trends:** Track quarter-over-quarter growth and seasonal patterns
+- **Pipeline visibility:** Monitor engaging opportunities and potential sales value
+- **Geographic insights:** Understand sales distribution across countries and industries
