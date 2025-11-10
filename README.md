@@ -86,6 +86,7 @@ ORDER BY quarter_year ASC
 
   - **Finding:** Q2 2017 appeared to be the strongest quarter at $3.09M, while Q1 lagged at $1.13M—a 63% difference revealing mid-year revenue spike.
 - **Top Performers**:
+  
 ```sql
 SELECT TOP 5
     t1.sales_agent, 
