@@ -1,6 +1,7 @@
 # CRM Sales Opportunities Dashboard
 The project designs an interactive dashboard for sales team managers of a company selling computer hardware to large businesses to keep track of sales performance of their team. <br>
-The dashboard project utilizes SQL (T-SQL) to clean and explore data, and Power BI to create the interactive dashboard.
+
+#### Tech Stack: SQL (T-SQL) | Power BI | DAX
 
 ## Business Problem:
 The sales organization needed a centralized analytics solution to:
@@ -11,3 +12,5 @@ The sales organization needed a centralized analytics solution to:
 - **Identify trends:** Track quarter-over-quarter growth and seasonal patterns
 - **Pipeline visibility:** Monitor engaging opportunities and potential sales value
 - **Geographic insights:** Understand sales distribution across countries and industries
+
+
