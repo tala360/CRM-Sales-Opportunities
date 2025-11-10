@@ -8,6 +8,7 @@ The project designs an interactive dashboard for sales team managers of a compan
   <img src="images/page_4.png" alt="page 4" width="600" height="350"><br>
   <img src="images/page_5.png" alt="page 5" width="600" height="350">
 </p>
+
 ### SQL Techniques Used:
 - Window Functions (AVG OVER PARTITION BY, RANK)
 - CTEs for complex query organization
