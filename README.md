@@ -83,7 +83,7 @@ WHERE deal_stage='Won'
 GROUP BY CONCAT('Q',DATEPART(QUARTER,CLOSE_DATE),' ',DATEPART(YEAR,CLOSE_DATE))
 ORDER BY quarter_year ASC
 ```
-<br>
+
   - **Finding:** Q2 2017 appeared to be the strongest quarter at $3.09M, while Q1 lagged at $1.13M—a 63% difference revealing mid-year revenue spike.
 - **Top Performers**:
 ```sql
