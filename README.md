@@ -12,4 +12,7 @@ The sales organization needed a centralized analytics solution to:
 - **Pipeline visibility:** Monitor engaging opportunities and potential sales value
 - **Geographic insights:** Understand sales distribution across countries and industries
 
+## About the Dataset
+The dataset contains four tables:
+- ``accounts``: Account details of clients including company name, industry, year established, number of employees, annual revenue, location, and parent company.
 
