@@ -227,11 +227,24 @@ I then created a variety of measures and calculated columns using DAX, including
 ### 6. Dashboard Design & Development
 I built a 5-page interactive dashboard with strategic layout and user experience:
 
-  - Page 1: Performance Overview
+  - **Page 1: Performance Overview**
     - You can filter by manager name and the timeframe (year or quarter) to get an overview of the manager's performance during the specified quarter.
     - Comparative Metrics: Company averages displayed alongside manager metrics
     - Clicking on the "Click to see details" button navigates to the Engagement Opportunities page shown in point (2).
       ![page_1](images/page_1.png)
-  
+  - **Page 2: Engagement Opportunities**
+    - Details of all deals with potential, where the `deal_stage = 'Engaging'`.
+    - Slicers to filter by manager name, the timeframe (year or quarter), and sales agent.
+      ![page_2](images/page_2.png)
+  - **Page 3: Sales Trends Analysis**
+    - Monthly analysis for sales and win rates, with company average as a comparative metric/benchmark.
+    - Also shows the top 5 largest deals closed and the highest-value customers.
+      ![page_3](images/page_3.png)
+  - **Page 4: Regional and Product Analysis**
+    - Total sales by country, product, and industry.
+      ![page_4](images/page_4.png)
+  - **Page 5: Manager Performance Comparison**
+    - 4 comparison charts: total sales by manager, average sale value per manager, win rates by manager, and average days to close by manager.
+      ![page_5](images/page_5.png)
 
   
