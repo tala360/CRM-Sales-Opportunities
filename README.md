@@ -30,4 +30,4 @@ I began by setting up a SQL Server database and importing the raw CSV data files
   - Fields: sales_agent, manager, regional_office
   - Links 30+ agents to 6 regional managers
 **Import Process**:
-- Used ``sql BULK INSERT``
+- Used ```sql BULK INSERT; 
