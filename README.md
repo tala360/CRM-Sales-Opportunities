@@ -88,66 +88,73 @@ Some of my findings include:
     - **Finding:** Q2 2017 appeared to be the strongest quarter at $3.09M, while Q1 lagged at $1.13M—a 63% difference revealing mid-year revenue spike.
 
     
-- **Top Performers**:
-  
-```sql
-SELECT TOP 5
-    t1.sales_agent, 
-    t2.manager,
-    SUM(close_value) AS total_sales,
-    AVG(close_value) AS avg_sale_value,
-    COUNT(DISTINCT opportunity_id) AS count_sales
-FROM sales_pipeline t1
-LEFT JOIN sales_agents t2 ON LOWER(t1.sales_agent)=LOWER(t2.sales_agent)
-WHERE deal_stage = 'Won'
-GROUP BY t1.sales_agent,t2.manager
-ORDER BY total_sales DESC
-```
+- **Top Performers**:  
+    ```sql
+    SELECT TOP 5
+        t1.sales_agent, 
+        t2.manager,
+        SUM(close_value) AS total_sales,
+        AVG(close_value) AS avg_sale_value,
+        COUNT(DISTINCT opportunity_id) AS count_sales
+    FROM sales_pipeline t1
+    LEFT JOIN sales_agents t2 ON LOWER(t1.sales_agent)=LOWER(t2.sales_agent)
+    WHERE deal_stage = 'Won'
+    GROUP BY t1.sales_agent,t2.manager
+    ORDER BY total_sales DESC
+    ```
 
-  - **Finding**: Darcel Schlecht dominated with $1.15M in closed revenue, more than 2x the second-place performer.
+    - **Finding**: Darcel Schlecht dominated with $1.15M in closed revenue, more than 2x the second-place performer.
 
-    
-- **Win Rate Analysis**:
-```sql
-SELECT 
-    t1.sales_agent,
-    t2.manager,
-    SUM(CASE WHEN deal_stage='Won' THEN 1 ELSE 0 END) AS won_opp,
-    SUM(CASE WHEN deal_stage='Lost' THEN 1 ELSE 0 END) AS lost_opp,
-    COUNT(*) AS total_opps,
-    ROUND(CAST(SUM(CASE WHEN deal_stage='Won' THEN 1 ELSE 0 END) AS FLOAT) / COUNT(*) * 100, 2) AS win_rate,
-    ROUND(CAST(SUM(CASE WHEN deal_stage='Lost' THEN 1 ELSE 0 END) AS FLOAT) / COUNT(*) * 100, 2) AS losing_rate
-FROM sales_pipeline t1
-LEFT JOIN sales_agents t2 ON LOWER(t1.sales_agent) = LOWER(t2.sales_agent)
-WHERE deal_stage IN ('Won','Lost')  
-GROUP BY t1.sales_agent,t2.manager
-```
-  - **Finding**: Win rates varied 51% to 68%. The 17-point spread represents massive coaching opportunity.
-- **Pipeline Opportunity Analysis**:
-```sql
-SELECT
-    t1.sales_agent,
-    t3.manager,
-    COUNT(opportunity_id) AS total_opportunities,
-    SUM(t2.sales_price) AS total_potential_value
-FROM sales_pipeline t1
-LEFT JOIN products t2 ON t1.[product] = t2.[product]
-LEFT JOIN sales_agents t3 ON LOWER(t3.sales_agent) = LOWER(t1.sales_agent)
-WHERE t1.deal_stage = 'Engaging'
-GROUP BY t1.sales_agent, t3.manager
-ORDER BY total_opportunities DESC
-```
-  - **Finding**: Markita Hansen held highest potential value ($282.8K/79 deals) vs Vicki Laflamme's volume strategy (104 opportunities/$227.3K).
-- **Geographic Analysis**:
-```sql
-SELECT 
-    office_location AS region, 
-    SUM(close_value) AS total_sales
-FROM sales_pipeline AS t1
-LEFT JOIN accounts AS t2 ON t1.account = t2.account
-WHERE deal_stage = 'Won'
-GROUP BY office_location
-ORDER BY total_sales DESC
-```
-  - **Finding**: Top 5 countries (US, Korea, Jordan, Panama, Japan) drove majority revenue.
+
+- **Win Rate Analysis**:  
+    ```sql
+    SELECT 
+        t1.sales_agent,
+        t2.manager,
+        SUM(CASE WHEN deal_stage='Won' THEN 1 ELSE 0 END) AS won_opp,
+        SUM(CASE WHEN deal_stage='Lost' THEN 1 ELSE 0 END) AS lost_opp,
+        COUNT(*) AS total_opps,
+        ROUND(CAST(SUM(CASE WHEN deal_stage='Won' THEN 1 ELSE 0 END) AS FLOAT) / COUNT(*) * 100, 2) AS win_rate,
+        ROUND(CAST(SUM(CASE WHEN deal_stage='Lost' THEN 1 ELSE 0 END) AS FLOAT) / COUNT(*) * 100, 2) AS losing_rate
+    FROM sales_pipeline t1
+    LEFT JOIN sales_agents t2 ON LOWER(t1.sales_agent) = LOWER(t2.sales_agent)
+    WHERE deal_stage IN ('Won','Lost')  
+    GROUP BY t1.sales_agent,t2.manager
+    ```
+
+    - **Finding**: Win rates varied 51% to 68%. The 17-point spread represents massive coaching opportunity.
+
+
+- **Pipeline Opportunity Analysis**:  
+    ```sql
+    SELECT
+        t1.sales_agent,
+        t3.manager,
+        COUNT(opportunity_id) AS total_opportunities,
+        SUM(t2.sales_price) AS total_potential_value
+    FROM sales_pipeline t1
+    LEFT JOIN products t2 ON t1.[product] = t2.[product]
+    LEFT JOIN sales_agents t3 ON LOWER(t3.sales_agent) = LOWER(t1.sales_agent)
+    WHERE t1.deal_stage = 'Engaging'
+    GROUP BY t1.sales_agent, t3.manager
+    ORDER BY total_opportunities DESC
+    ```
+
+    - **Finding**: Markita Hansen held highest potential value ($282.8K/79 deals) vs Vicki Laflamme's volume strategy (104 opportunities/$227.3K).
+
+
+- **Geographic Analysis**:  
+    ```sql
+    SELECT 
+        office_location AS region, 
+        SUM(close_value) AS total_sales
+    FROM sales_pipeline AS t1
+    LEFT JOIN accounts AS t2 ON t1.account = t2.account
+    WHERE deal_stage = 'Won'
+    GROUP BY office_location
+    ORDER BY total_sales DESC
+    ```
+
+    - **Finding**: Top 5 countries (US, Korea, Jordan, Panama, Japan) drove majority revenue.
+
 The rest of the EDA analysis can be found in `EDA.sql`.
