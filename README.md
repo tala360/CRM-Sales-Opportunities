@@ -12,19 +12,12 @@ The sales organization needed a centralized analytics solution to:
 - **Pipeline visibility:** Monitor engaging opportunities and potential sales value
 - **Geographic insights:** Understand sales distribution across countries and industries
 
-## About the Dataset
-The dataset contains four tables:
-- ``accounts``: dimension table, contains account details of the clients.
-- ``products``:  dimension table, contains details of products offered.
-- ``sales_pipeline``: fact table, contains details about the sale opportunities.
-- ``sales_teams``: dimension table, contains details about the sales teams.
-
 ## My Process
 ### 1. Data Import & Database Setup
 I began by setting up a SQL Server database and importing the raw CSV data files:
 - Database Architecture: created a relational database (crm_sales) with 4 normalized tables:
 - ``accounts`` table - Customer/company information
--- Fields: account name, sector, year_established, revenue, employees, office_location, subsidiary_of
--- Data types optimized: NVARCHAR for text, DECIMAL for revenue, INT for employees
+  - Fields: account name, sector, year_established, revenue, employees, office_location, subsidiary_of
+  - Data types optimized: NVARCHAR for text, DECIMAL for revenue, INT for employees
 
 
