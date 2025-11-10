@@ -200,14 +200,17 @@ I designed a star schema in Power BI optimized for performance, with one-to-many
 
 I then created a variety of measures and calculated columns using DAX, including but not limited to:
 - **QoQ Sales Growth**:
-  ```QoQ Sales Growth = 
+  ```
+    QoQ Sales Growth = 
     var SalesLastQtr = CALCULATE(sum('sales_pipeline'[close_value]),DATEADD('Calendar'[Date], -1, QUARTER))
     return divide(sum('sales_pipeline'[close_value])-SalesLastQtr,SalesLastQtr)
     ```
   - **Win Rate**:
-    ```Total Wins = CALCULATE(COUNTROWS('sales_pipeline'),FILTER('sales_pipeline','sales_pipeline'[deal_stage] = "Won"))```
-  ```Win Rate = 
-      VAR Losses =  CALCULATE(COUNT([opportunity_id]), sales_pipeline[deal_stage]="Lost")
-      RETURN
-      DIVIDE([Total Wins], [Total Wins] + Losses)
-  ```
+    ```
+    Total Wins = CALCULATE(COUNTROWS('sales_pipeline'),FILTER('sales_pipeline','sales_pipeline'[deal_stage] = "Won"))
+    ```
+    ```
+        Win Rate = 
+        VAR Losses =  CALCULATE(COUNT([opportunity_id]), sales_pipeline[deal_stage]="Lost")
+        RETURN DIVIDE([Total Wins], [Total Wins] + Losses)
+    ```
