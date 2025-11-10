@@ -43,3 +43,21 @@ I began by setting up a SQL Server database and importing the raw CSV data files
 **Code can be found in `data_importing.sql` file.**
 
 ### 2. Data Profiling
+I conducted comprehensive data profiling across all four tables to assess data quality and identify potential issues:
+- Validated row counts and checked for duplicate records
+- Assessed NULL values across all critical fields (dates, values, identifiers)
+- Verified referential integrity between tables using LEFT JOINs
+- Analyzed date ranges to ensure logical timeframes
+- Examined value distributions (min, max, avg) for numeric fields
+- Cross-referenced dimension tables with fact table for consistency
+- Investigated business logic of deal stages and their corresponding data patterns
+
+#### Key Data Quality Issue Identified:
+- **Inconsistent Product Naming:** Discovered "GTX Pro" vs "GTXPro" spelling inconsistency between sales_pipeline and products tables, which would cause issues when linking them together.<br>
+Fixed using the following code:
+```sql
+UPDATE sales_pipeline
+SET product = 'GTX Pro'
+WHERE product = 'GTXPro'
+```
+
