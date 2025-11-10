@@ -2,6 +2,14 @@
 The project designs an interactive dashboard for sales team managers of a company selling computer hardware to large businesses to keep track of sales performance of their team. <br>
 
 ### Tech Stack: SQL (T-SQL) | Power BI | DAX
+### SQL Techniques Used:
+- Window Functions (AVG OVER PARTITION BY, RANK)
+- CTEs for complex query organization
+- Conditional Aggregation (CASE WHEN)
+- Date Functions (DATEPART, DATEDIFF, CONCAT)
+- Multi-table JOINs
+- Type casting for accurate calculations
+- Case-insensitive matching (LOWER)
 
 ## Business Problem:
 The sales organization needed a centralized analytics solution to:
@@ -162,6 +170,26 @@ Some of my findings include:
     ```
 
     - **Finding**: GTX Pro led revenue ($3.51M/55% win rate) while MG Special had highest win rate (64.84%): price vs. conversion trade-off.
+ 
+- **Manager Performance using Window Functions**:  
+    ```sql
+          WITH qtr_sales_by_manager AS (
+          SELECT
+              CONCAT('Q',DATEPART(QUARTER,CLOSE_DATE),' ',DATEPART(YEAR,CLOSE_DATE)) AS quarter_year,
+              manager,
+              SUM(close_value) AS Total_Sales
+          FROM sales_pipeline AS sp
+          LEFT JOIN sales_agents AS st ON sp.sales_agent = st.sales_agent
+          WHERE close_date IS NOT NULL
+          GROUP BY CONCAT('Q',DATEPART(QUARTER,CLOSE_DATE),' ',DATEPART(YEAR,CLOSE_DATE)), manager)
+      SELECT *,
+          AVG(Total_Sales) OVER(PARTITION BY quarter_year) AS company_avg,
+          RANK() OVER(PARTITION BY quarter_year ORDER BY Total_Sales DESC) AS 'Rank'
+      FROM qtr_sales_by_manager
+      ORDER BY quarter_year, Total_Sales DESC
+    ```
+
+    - **Finding**: Rankings fluctuated quarterly, window functions revealed consistency champions vs. volatile performers.
 
 The rest of the EDA analysis can be found in `EDA.sql`.
 
