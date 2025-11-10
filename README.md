@@ -30,15 +30,15 @@ I began by setting up a SQL Server database and importing the raw CSV data files
   - Fields: sales_agent, manager, regional_office
   - Links 30+ agents to 6 regional managers
 #### Import Process:
-- Used BULK INSERT for efficient data loading
+- Used `BULK INSERT` for efficient data loading
 - Specified field and row terminators for CSV parsing
-- Set FIRSTROW = 2 to skip CSV headers
+- Set `FIRSTROW = 2` to skip CSV headers
 
 #### Design Decisions:
 - Normalized structure prevents data redundancy
 - Primary key on opportunity_id ensures unique opportunities
 - Foreign key relationships defined through shared columns (sales_agent, product, account)
-- Data types sized appropriately (NVARCHAR(50) for names, SMALLINT for years, DECIMAL(7,2) for revenue)
+- Data types sized appropriately (`NVARCHAR(50)` for names, `SMALLINT` for years, `DECIMAL(7,2)` for revenue)
 
 **Code can be found in `data_importing.sql` file.**
 
