@@ -10,10 +10,10 @@ The project designs an interactive dashboard for sales team managers of a compan
 </p>
 
 ### SQL Techniques Used:
-- Window Functions (AVG OVER PARTITION BY, RANK)
+- Window functions (AVG OVER PARTITION BY, RANK)
 - CTEs for complex query organization
-- Conditional Aggregation (CASE WHEN)
-- Date Functions (DATEPART, DATEDIFF, CONCAT)
+- Conditional aggregation (CASE WHEN)
+- Date functions (DATEPART, DATEDIFF, CONCAT)
 - Multi-table JOINs
 - Type casting for accurate calculations
 - Case-insensitive matching (LOWER)
