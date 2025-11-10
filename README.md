@@ -191,13 +191,14 @@ Some of my findings include:
 
     - **Finding**: Rankings fluctuated quarterly, window functions revealed consistency champions vs. volatile performers.
 
-The rest of the EDA analysis can be found in `EDA.sql`.
+The rest of the EDA can be found in `EDA.sql`.
 
 ### 4. Data Modeling
 First, I connected to the data in Power BI using the SQL Server connector through Import Mode.<br>
 I designed a star schema in Power BI optimized for performance, with one-to-many relationships between the dimension and fact tables respectively. A calendar table was created to enable time series analysis such as quarter-on-quarter growth, with `close_date` as the active relationship and `engage_date` as an inactive relationship.
 ![schema](images/schema.png)
 
+### 5. DAX Measures Development
 I then created a variety of measures and calculated columns using DAX, including but not limited to:
 - **QoQ Sales Growth**:
   ```
@@ -205,7 +206,7 @@ I then created a variety of measures and calculated columns using DAX, including
     var SalesLastQtr = CALCULATE(sum('sales_pipeline'[close_value]),DATEADD('Calendar'[Date], -1, QUARTER))
     return divide(sum('sales_pipeline'[close_value])-SalesLastQtr,SalesLastQtr)
     ```
-  - **Win Rate**:
+- **Win Rate**:
     ```
     Total Wins = CALCULATE(COUNTROWS('sales_pipeline'),FILTER('sales_pipeline','sales_pipeline'[deal_stage] = "Won"))
     ```
@@ -214,3 +215,23 @@ I then created a variety of measures and calculated columns using DAX, including
         VAR Losses =  CALCULATE(COUNT([opportunity_id]), sales_pipeline[deal_stage]="Lost")
         RETURN DIVIDE([Total Wins], [Total Wins] + Losses)
     ```
+- **Potential Sales**:
+  ```
+    Potential Sales = 
+    CALCULATE(
+    SUMX(FILTER('sales_pipeline','sales_pipeline'[deal_stage] = "Engaging"),RELATED('products'[sales_price])),REMOVEFILTERS('Calendar'))
+  ```
+
+  The rest of the DAX code can be found in the `CRM_sales_opps.pbix` file.
+
+### 6. Dashboard Design & Development
+I built a 5-page interactive dashboard with strategic layout and user experience:
+
+  - Page 1: Performance Overview
+    - You can filter by manager name and the timeframe (year or quarter) to get an overview of the manager's performance during the specified quarter.
+    - Comparative Metrics: Company averages displayed alongside manager metrics
+    - Clicking on the "Click to see details" button navigates to the Engagement Opportunities page shown in point (2).
+      ![page 1][images/page 1.png]
+  
+
+  
